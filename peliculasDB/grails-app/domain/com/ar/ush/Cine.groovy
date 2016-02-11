@@ -1,15 +1,15 @@
 package com.ar.ush
 
-class Theater {
-    String name
-    String zip
-    String description
-    BigDecimal ticketPrice
+class Cine {
+    String nombre
+    String codigoPostal
+    String descripcion
+    BigDecimal precioTicket
 
     static hasMany = [horarios: Horario]
 
     static constraints = {
-        description maxSize: 4000
+        descripcion maxSize: 4000
     }
 
     List<Pelicula> obtenerPeliculas () {
