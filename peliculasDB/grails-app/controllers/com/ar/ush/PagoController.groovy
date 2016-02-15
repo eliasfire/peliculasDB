@@ -7,32 +7,32 @@ class PagoController {
     def springSecurityService
 
     def completePago (OrdenPago ordenPago) {
-        Horario showtime = Horario.get(ordenPago.showtimeId)
-        showtime.seatsAvailable -= ordenPago.numberOfTickets
-        showtime.ticketsSold += ordenPago.numberOfTickets
-        showtime.save(failOnError: true, flush: true)
+        Horario horario = Horario.get(ordenPago.horarioId)
+        horario.asientosDisponibles -= ordenPago.numeroTickets
+        horario.ticketsVendidos += ordenPago.numeroTickets
+        horario.save(failOnError: true, flush: true)
 
-        Pago purchase = new Pago()
-        purchase.numberOfTickets = ordenPago.numberOfTickets
-        purchase.showtime = showtime
-        purchase.user = springSecurityService.currentUser as User
-        purchase.save(failOnError: true, flush: true)
+        Pago pago = new Pago()
+        pago.numeroTickets = ordenPago.numeroTickets
+        pago.horario = horario
+        pago.user = springSecurityService.currentUser as User
+        pago.save(failOnError: true, flush: true)
 
 
-        [showtime: showtime, numberOfTickets: purchase.numberOfTickets]
+        [horario: horario, numeroTickets: pago.numeroTickets]
     }
 
-    def startPagoForHorario (Horario showtime) {
-        [showtime: showtime]
+    def startPagoForHorario (Horario horario) {
+        [horario: horario]
     }
 
     def reserveTickets (OrdenPago ordenPago) {
-        Horario showtime = Horario.get(ordenPago.showtimeId)
+        Horario horario = Horario.get(ordenPago.horarioId)
         if (ordenPago.hasErrors()) {
-            flash.message = "Sorry, there are only ${showtime.seatsAvailable} tickets available for this showtime."
-            redirect action: 'startPagoForHorario', id: ordenPago.showtimeId
+            flash.message = "Sorry, there are only ${horario.asientosDisponibles} tickets available for this horario."
+            redirect action: 'startPagoForHorario', id: ordenPago.horarioId
         } else {
-            [showtime: showtime, numberOfTickets: ordenPago.numberOfTickets]
+            [horario: horario, numeroTickets: ordenPago.numeroTickets]
         }
     }
 }

@@ -3,17 +3,17 @@ package com.ar.ush
 class HorarioController {
     static defaultAction = "show"
 
-    def show(Showtime showtime) {
-        [showtime:showtime]
+    def show(Horario horario) {
+        [horario:horario]
     }
 
-    def movieShowtimes (Movie movie) {
-        Map<Theater,List<Showtime>> showtimesByTheater = movie.showtimes.groupBy { it.theater }
-        [movie:movie, showtimesByTheater:showtimesByTheater]
+    def peliculaHorarios (Pelicula pelicula) {
+        Map<Cine,List<Horario>> horariosByCine = pelicula.horarios.groupBy { it.cine }
+        [pelicula:pelicula, horariosByCine:horariosByCine]
     }
 
-    def theaterShowtimes (Theater theater) {
-        Map<Movie,List<Showtime>> showtimesByMovie = theater.showtimes.groupBy {it.movie}
-        [theater:theater, showtimesByMovie:showtimesByMovie]
+    def cineHorarios (Cine cine) {
+        Map<Pelicula,List<Horario>> horariosByPelicula = cine.horarios.groupBy {it.pelicula}
+        [cine:cine, horariosByPelicula:horariosByPelicula]
     }
 }

@@ -5,7 +5,7 @@ class Horario {
 	Integer asientosDisponibles
 	Integer ticketsVendidos
 
-	static belongsTo = [pelicula: Pelicula]
+	static belongsTo = [pelicula: Pelicula, cine: Cine]
 
 	static constraints = {
 	}

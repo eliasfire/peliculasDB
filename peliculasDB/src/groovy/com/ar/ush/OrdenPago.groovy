@@ -4,12 +4,12 @@ import grails.validation.Validateable
 
 @Validateable
 class OrdenPago {
-    Integer numberOfTickets
-    Long showtimeId
+    Integer numeroTickets
+    Long horarioId
 
     static constraints = {
-        numberOfTickets nullable: true, validator: { value, command ->
-            Integer availableSeats = Showtime.get(command.showtimeId).seatsAvailable
+        numeroTickets nullable: true, validator: { value, command ->
+            Integer availableSeats = Horario.get(command.horarioId).asientosDisponibles
             if (value > availableSeats) {
                 return false
             }
