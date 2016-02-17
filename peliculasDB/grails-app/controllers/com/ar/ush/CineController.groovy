@@ -1,9 +1,9 @@
 package com.ar.ush
 
 class CineController {
-    static defaultAction = 'listAll'
+    static defaultAction = 'listarTodo'
 
-    def listAll() {
-        [theaters:Theater.list(sort:'name')]
+    def listarTodo() {
+        [cines:Cine.list(sort:'nombre')]
     }
 }

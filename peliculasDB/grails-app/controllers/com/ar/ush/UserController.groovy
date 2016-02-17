@@ -17,7 +17,7 @@ class UserController {
 
     def create() {
         if (springSecurityService.loggedIn) {
-            redirect([controller: 'account', view: 'index'])
+            redirect([controller: 'cuenta', view: 'index'])
         } else {
             respond new User(params)
         }
@@ -42,7 +42,7 @@ class UserController {
 
         springSecurityService.reauthenticate(userInstance.username)
 
-        redirect([controller: 'account', view: 'index'])
+        redirect([controller: 'cuenta', view: 'index'])
     }
 
     def edit(User userInstance) {
@@ -65,6 +65,6 @@ class UserController {
 
         springSecurityService.reauthenticate(userInstance.username)
 
-        redirect([controller: 'account', view: 'index'])
+        redirect([controller: 'cuenta', view: 'index'])
     }
 }

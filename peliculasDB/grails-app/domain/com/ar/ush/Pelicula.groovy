@@ -4,9 +4,9 @@ class Pelicula {
 
 	String titulo
 	String sinopsis
-	Persona director
 	Integer duracion
-	
+	Integer rating
+		
 	static hasMany = [horarios: Horario]
 	
     static constraints = {
